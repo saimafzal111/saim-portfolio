@@ -2,6 +2,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from './Button';
+import Sports from "../assets/sports.png";
+import Expense from "../assets/expense.png";
+import Travel from "../assets/travel.png";
+import Gym from "../assets/gym.png";
+import Brainwave from "../assets/brainwave.png";
+import Saim from "../assets/saim.png";
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
@@ -11,48 +17,54 @@ const Projects = () => {
       id: 1,
       title: 'Expense Tracker',
       description: 'An expense tracker is an application to keep record of all your income and expenses.',
-      category: 'web',
-      link: '#',
+      category: 'React JS',
+      image: Expense,
+      link: "#"
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A task management application with drag and drop functionality.',
-      category: 'app',
-      link: '#',
+      title: 'Travel Booking Platform',
+      description: 'A user-friendly platform to search, compare, and book flights, hotels, and travel packages seamlessly.',
+      category: 'Vanilla JS',
+      image: Travel,
+      link: "#"
     },
     {
       id: 3,
       title: 'Portfolio Website',
       description: 'A modern portfolio website with dark mode and animations.',
-      category: 'web',
-      link: '#',
+      category: 'React JS',
+      image: Saim,
+      link: "#"
     },
     {
       id: 4,
-      title: 'Weather Dashboard',
-      description: 'A weather dashboard that displays current and forecasted weather.',
-      category: 'app',
-      link: '#',
+      title: 'Sports App',
+      description: 'A dynamic app providing live scores, news, and updates for your favorite sports and teams.',
+      category: 'Vanilla JS',
+      image: Sports,
+      link: "#"
     },
     {
       id: 5,
       title: 'Brainwave',
       description: 'Brainwave is a conversational web application powered by advanced natural language processing.',
-      category: 'web',
-      link: '#',
+      category: 'React JS',
+      image: Brainwave,
+      link: "#"
     },
     {
       id: 6,
       title: 'Fitness Guidance',
       description: 'A fitness guidance application with workout plans.',
-      category: 'web',
-      link: '#',
+      category: 'React JS',
+      image: Gym,
+      link: "#"
     },
   ];
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
+  const filteredProjects = filter === 'all'
+    ? projects
     : projects.filter(project => project.category === filter);
 
   return (
@@ -71,23 +83,23 @@ const Projects = () => {
 
         <div className="flex justify-center mb-12">
           <div className="flex space-x-4">
-            <Button 
-              onClick={() => setFilter('all')} 
+            <Button
+              onClick={() => setFilter('all')}
               className={`${filter === 'all' ? 'bg-gradient-to-r from-blue-600 to-indigo-700' : 'bg-gray-300 dark:bg-gray-700'} text-white`}
             >
               All
             </Button>
-            <Button 
-              onClick={() => setFilter('web')} 
-              className={`${filter === 'web' ? 'bg-gradient-to-r from-blue-600 to-indigo-700' : 'bg-gray-300 dark:bg-gray-700'} text-white`}
+            <Button
+              onClick={() => setFilter('React JS')}
+              className={`${filter === 'React JS' ? 'bg-gradient-to-r from-blue-600 to-indigo-700' : 'bg-gray-300 dark:bg-gray-700'} text-white`}
             >
-              Web
+              React JS
             </Button>
-            <Button 
-              onClick={() => setFilter('app')} 
-              className={`${filter === 'app' ? 'bg-gradient-to-r from-blue-600 to-indigo-700' : 'bg-gray-300 dark:bg-gray-700'} text-white`}
+            <Button
+              onClick={() => setFilter('Vanilla JS')}
+              className={`${filter === 'Vanilla JS' ? 'bg-gradient-to-r from-blue-600 to-indigo-700' : 'bg-gray-300 dark:bg-gray-700'} text-white`}
             >
-              App
+              Vanilla JS
             </Button>
           </div>
         </div>
@@ -102,8 +114,12 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
-              <div className="h-48 bg-gradient-to-r from-blue-500 to-indigo-700 flex items-center justify-center">
-                <span className="text-5xl font-bold text-white/80">{project.title.charAt(0)}</span>
+              <div className="h-48 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>

@@ -6,23 +6,23 @@ const Education = () => {
     {
       id: 1,
       degree: 'Bachelor of Science in Computer Science',
-      institution: 'University Name',
-      period: '2018 - 2022',
+      institution: 'Government Graduate College Samundri, Faisalabad',
+      period: '2022...',
       description: 'Graduated with honors. Relevant coursework: Data Structures, Algorithms, Web Development, Database Systems.',
     },
     {
       id: 2,
       degree: 'Frontend Development Bootcamp',
-      institution: 'Bootcamp Name',
-      period: '2022',
+      institution: 'Spark IT institute',
+      period: '2024',
       description: 'Intensive 12-week program focused on modern frontend technologies including React, JavaScript, and CSS frameworks.',
     },
     {
       id: 3,
-      degree: 'Web Design Certification',
-      institution: 'Online Platform',
+      degree: 'Freelancing Certification',
+      institution: 'Online Platform (DigiSkills)',
       period: '2021',
-      description: 'Completed certification in responsive web design and user experience principles.',
+      description: 'Learn essential skills to start your freelancing career and earn online independently.',
     },
   ];
 

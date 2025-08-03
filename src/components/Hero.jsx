@@ -29,10 +29,10 @@ const Hero = () => {
             </p>
             <div className="flex space-x-4">
               <Button>
-                View Projects
+                <a href="#projects">View Projects</a>
               </Button>
               <Button className="bg-transparent border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white">
-                Contact Me
+                <a href="#contact">Contact Me</a>
               </Button>
             </div>
           </motion.div>
@@ -49,8 +49,7 @@ const Hero = () => {
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-700 opacity-70"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  {/* <span className="text-6xl font-bold text-white">S</span> */}
-                  <img className='h-[100%] w-[100%] object-cover rounded-full' src={profileImg} alt="Profile Img" />
+                  <img className='h-full w-full object-cover rounded-full' src={profileImg} alt="Profile Img" />
                 </div>
               </div>
             </div>

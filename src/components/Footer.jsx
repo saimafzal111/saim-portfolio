@@ -24,15 +24,38 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex space-x-6"
           >
-            {['github', 'linkedin', 'twitter', 'instagram'].map((icon) => (
-              <a
-                key={icon}
-                href="#"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors text-2xl"
-              >
-                <i className={`fab fa-${icon}`}></i>
-              </a>
-            ))}
+            <a
+              href="https://github.com/saimafzal111"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors text-2xl"
+            >
+              <i className="fab fa-github"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/saim-afzal-2862a235a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors text-2xl"
+            >
+              <i className="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://www.tiktok.com/@saimhere61?lang=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors text-2xl"
+            >
+              <i className="fab fa-tiktok"></i>
+            </a>
+            <a
+              href="https://instagram.com/saimhere61"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors text-2xl"
+            >
+              <i className="fab fa-instagram"></i>
+            </a>
           </motion.div>
         </div>
 

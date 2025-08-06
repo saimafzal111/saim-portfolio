@@ -61,7 +61,7 @@ const Header = () => {
             )}
           </Button>
           
-          {/* Mobile Menu Button - Fixed icon logic */}
+          {/* Mobile Menu Button */}
           <Button 
             onClick={toggleMenu} 
             className="md:hidden p-2 rounded-full shadow bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
@@ -76,7 +76,7 @@ const Header = () => {
         </div>
       </nav>
       
-      {/* Mobile Menu - Added missing menu content */}
+      {/* Mobile Menu */}
       {isOpen && (
         <motion.div 
           className="md:hidden fixed top-16 left-0 w-full bg-white dark:bg-gray-900 shadow-lg z-40"
@@ -90,7 +90,7 @@ const Header = () => {
                 key={index}
                 href={link.href}
                 className="text-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                onClick={() => setIsOpen(false)} // Close menu on link click
+                onClick={() => setIsOpen(false)}
               >
                 {link.name}
               </a>

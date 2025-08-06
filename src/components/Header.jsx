@@ -1,12 +1,15 @@
 // components/Header.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import Button from './Button';
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
   const { darkMode, toggleDarkMode } = useTheme();
-
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
+  
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
@@ -27,7 +30,8 @@ const Header = () => {
         >
           Saim
         </motion.div>
-
+        
+        {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6">
           {navLinks.map((link, index) => (
             <motion.a
@@ -42,7 +46,7 @@ const Header = () => {
             </motion.a>
           ))}
         </div>
-
+        
         <div className="flex items-center space-x-4">
           {/* Theme Toggle Button */}
           <Button 
@@ -56,13 +60,44 @@ const Header = () => {
               <i className="fas fa-moon text-gray-800 dark:text-gray-200" title="Switch to Dark Mode"></i>
             )}
           </Button>
-
-          {/* Mobile Menu Button */}
-          <Button className="md:hidden p-2 rounded-full shadow bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700">
-            <i className="fas fa-bars text-gray-800 dark:text-gray-200"></i>
+          
+          {/* Mobile Menu Button - Fixed icon logic */}
+          <Button 
+            onClick={toggleMenu} 
+            className="md:hidden p-2 rounded-full shadow bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+            aria-label="Toggle Mobile Menu"
+          >
+            {isOpen ? (
+              <FaTimes className='text-gray-800 dark:text-gray-200 text-2xl' />
+            ) : (
+              <FaBars className='text-gray-800 dark:text-gray-200 text-2xl' />
+            )}
           </Button>
         </div>
       </nav>
+      
+      {/* Mobile Menu - Added missing menu content */}
+      {isOpen && (
+        <motion.div 
+          className="md:hidden fixed top-16 left-0 w-full bg-white dark:bg-gray-900 shadow-lg z-40"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="flex flex-col items-center py-6 space-y-4">
+            {navLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="text-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                onClick={() => setIsOpen(false)} // Close menu on link click
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+      )}
     </header>
   );
 };

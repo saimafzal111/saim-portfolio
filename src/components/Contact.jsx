@@ -1,9 +1,11 @@
-// components/Contact.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from './Button';
+import { useForm, ValidationError } from '@formspree/react';
 
 const Contact = () => {
+  const [state, handleSubmit] = useForm("mdkdpyjr"); 
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,8 +14,6 @@ const Contact = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const validate = () => {
     const newErrors = {};
@@ -33,24 +33,6 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validate();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-    } else {
-      setIsSubmitting(true);
-      // Simulate form submission
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        // Reset success message after 5 seconds
-        setTimeout(() => setSubmitSuccess(false), 5000);
-      }, 1500);
-    }
-  };
-
   return (
     <section id="contact" className="py-20 bg-white dark:bg-gray-800/50">
       <div className="container mx-auto px-6">
@@ -66,7 +48,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="max-w-3xl mx-auto">
-          {submitSuccess && (
+          {state.succeeded && (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -83,7 +65,19 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"
           >
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const newErrors = validate();
+                if (Object.keys(newErrors).length > 0) {
+                  setErrors(newErrors);
+                } else {
+                  setErrors({});
+                  handleSubmit(e); // ✅ Sends to Formspree
+                  setFormData({ name: '', email: '', subject: '', message: '' });
+                }
+              }}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="name" className="block text-gray-900 dark:text-white mb-2">Name</label>
@@ -96,6 +90,7 @@ const Contact = () => {
                     className={`w-full px-4 py-2 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500`}
                   />
                   {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                  <ValidationError prefix="Name" field="name" errors={state.errors} />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-gray-900 dark:text-white mb-2">Email</label>
@@ -108,6 +103,7 @@ const Contact = () => {
                     className={`w-full px-4 py-2 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500`}
                   />
                   {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
                 </div>
               </div>
               <div className="mb-6">
@@ -121,6 +117,7 @@ const Contact = () => {
                   className={`w-full px-4 py-2 rounded-lg border ${errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500`}
                 />
                 {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
+                <ValidationError prefix="Subject" field="subject" errors={state.errors} />
               </div>
               <div className="mb-6">
                 <label htmlFor="message" className="block text-gray-900 dark:text-white mb-2">Message</label>
@@ -133,10 +130,11 @@ const Contact = () => {
                   className={`w-full px-4 py-2 rounded-lg border ${errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500`}
                 ></textarea>
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                <ValidationError prefix="Message" field="message" errors={state.errors} />
               </div>
               <div className="text-center">
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                <Button type="submit" disabled={state.submitting}>
+                  {state.submitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </div>
             </form>

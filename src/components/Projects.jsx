@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from './Button';
-import Sports from "../assets/sports.png";
+import GenieBot from "../assets/genieBot.png";
 import Expense from "../assets/expense.png";
 import Travel from "../assets/travel.png";
 import Gym from "../assets/gym.png";
@@ -39,12 +39,13 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: 'Sports App',
-      description: 'A dynamic app providing live scores, news, and updates for your favorite sports and teams.',
-      category: 'Vanilla JS',
-      image: Sports,
+      title: 'GenieBot--AI Assistant',
+      description: 'GenieBot is an AI-powered assistant built with React JS, Tailwind CSS, Appwrite, and OpenAI API. It can answer queries, solve problems, and provide helpful responses across various topics.',
+      category: 'React JS',
+      image: GenieBot,
       link: "#"
     },
+
     {
       id: 5,
       title: 'Brainwave',
@@ -125,8 +126,15 @@ const Projects = () => {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">{project.description}</p>
                 <Button>
-                  View Project
+                  <a
+                    href="https://chat-with-ai-phi-three.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Project
+                  </a>
                 </Button>
+
               </div>
             </motion.div>
           ))}
